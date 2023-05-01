@@ -1,12 +1,13 @@
-// Bootstrap cliui with CommonJS dependencies:
+// Bootstrap cliui with ESM dependencies:
 import { cliui } from './build/lib/index.js'
-import { wrap, stripAnsi } from './build/lib/string-utils.js'
+
+import stringWidth from 'string-width'
+import stripAnsi from 'strip-ansi'
+import wrap from 'wrap-ansi'
 
 export default function ui (opts) {
   return cliui(opts, {
-    stringWidth: (str) => {
-      return [...str].length
-    },
+    stringWidth,
     stripAnsi,
     wrap
   })

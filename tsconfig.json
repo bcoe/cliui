@@ -7,7 +7,7 @@
     "target": "es2017",
     "moduleResolution": "node",
     "module": "es2015"
-  },  
+  },
   "include": [
     "lib/**/*.ts"
   ],

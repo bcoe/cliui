@@ -35,10 +35,11 @@ describe('ESM', () => {
     // TODO: we should flesh out the Deno and ESM implementation
     // such that it spreads words out over multiple columns appropriately:
     const expected = [
-      'i am a string ti am a seconi am a third',
-      'hat should be wd string tha string that',
-      'rapped         t should be  should be w',
-      '               wrapped     rapped'
+      'i am a string  i am a      i am a third',
+      'that should be second      string that',
+      'wrapped        string that should be',
+      '               should be   wrapped',
+      '               wrapped'
     ]
     ui.toString().split('\n').forEach((line, i) => {
       strictEqual(line, expected[i])

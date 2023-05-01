@@ -19,7 +19,7 @@
     "fix": "standardx --fix '**/*.ts' && standardx --fix '**/*.js' && standardx --fix '**/*.cjs'",
     "pretest": "rimraf build && tsc -p tsconfig.test.json && cross-env NODE_ENV=test npm run build:cjs",
     "test": "c8 mocha ./test/*.cjs",
-    "test:esm": "c8 mocha ./test/esm/cliui-test.mjs",
+    "test:esm": "c8 mocha ./test/**/*.mjs",
     "postest": "check",
     "coverage": "c8 report --check-coverage",
     "precompile": "rimraf build",
@@ -49,9 +49,12 @@
   "author": "Ben Coe <ben@npmjs.com>",
   "license": "ISC",
   "dependencies": {
-    "string-width": "^4.2.0",
-    "strip-ansi": "^6.0.1",
-    "wrap-ansi": "^7.0.0"
+    "string-width": "^5.1.2",
+    "string-width-cjs": "npm:string-width@^4.2.0",
+    "strip-ansi": "^7.0.1",
+    "strip-ansi-cjs": "npm:strip-ansi@^6.0.1",
+    "wrap-ansi": "^8.1.0",
+    "wrap-ansi-cjs": "npm:wrap-ansi@^7.0.0"
   },
   "devDependencies": {
     "@types/node": "^14.0.27",

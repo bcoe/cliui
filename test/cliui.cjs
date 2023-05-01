@@ -9,7 +9,7 @@ process.env.FORCE_COLOR = 1
 
 const chalk = require('chalk')
 const cliui = require('../build/index.cjs')
-const stripAnsi = require('strip-ansi')
+const stripAnsi = require('strip-ansi-cjs')
 
 describe('cliui', () => {
   describe('resetOutput', () => {

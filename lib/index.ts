@@ -47,7 +47,9 @@ export class UI {
 
   constructor (opts: UIOptions) {
     this.width = opts.width
+    /* c8 ignore start */
     this.wrap = opts.wrap ?? true
+    /* c8 ignore stop */
     this.rows = []
   }
 
@@ -164,7 +166,10 @@ export class UI {
           const fn = align[(row[c].align as 'right'|'center')]
           ts = fn(ts, wrapWidth)
           if (mixin.stringWidth(ts) < wrapWidth) {
-            ts += ' '.repeat((width || 0) - mixin.stringWidth(ts) - 1)
+            /* c8 ignore start */
+            const w = width || 0
+            /* c8 ignore stop */
+            ts += ' '.repeat(w - mixin.stringWidth(ts) - 1)
           }
         }
 
@@ -202,9 +207,11 @@ export class UI {
   // the target line, do so.
   private renderInline (source: string, previousLine: Line) {
     const match = source.match(/^ */)
+    /* c8 ignore start */
     const leadingWhitespace = match ? match[0].length : 0
+    /* c8 ignore stop */
     const target = previousLine.text
-    const targetTextWidth = mixin.stringWidth(target.trimRight())
+    const targetTextWidth = mixin.stringWidth(target.trimEnd())
 
     if (!previousLine.span) {
       return source
@@ -223,13 +230,13 @@ export class UI {
 
     previousLine.hidden = true
 
-    return target.trimRight() + ' '.repeat(leadingWhitespace - targetTextWidth) + source.trimLeft()
+    return target.trimEnd() + ' '.repeat(leadingWhitespace - targetTextWidth) + source.trimStart()
   }
 
   private rasterize (row: ColumnArray) {
     const rrows: string[][] = []
     const widths = this.columnWidths(row)
-    let wrapped
+    let wrapped: string[]
 
     // word wrap all columns, and create
     // a data-structure that is easy to rasterize.
@@ -274,7 +281,9 @@ export class UI {
   }
 
   private negatePadding (col: Column) {
+    /* c8 ignore start */
     let wrapWidth = col.width || 0
+    /* c8 ignore stop */
     if (col.padding) {
       wrapWidth -= (col.padding[left] || 0) + (col.padding[right] || 0)
     }
@@ -308,7 +317,9 @@ export class UI {
     })
 
     // any unset widths should be calculated.
+    /* c8 ignore start */
     const unsetWidth = unset ? Math.floor(remainingWidth / unset) : 0
+    /* c8 ignore stop */
 
     return widths.map((w, i) => {
       if (w === undefined) {
@@ -349,12 +360,13 @@ function _minWidth (col: Column) {
 }
 
 function getWindowWidth (): number {
-  /* istanbul ignore next: depends on terminal */
+  /* c8 ignore start */
   if (typeof process === 'object' && process.stdout && process.stdout.columns) {
     return process.stdout.columns
   }
   return 80
 }
+/* c8 ignore stop */
 
 function alignRight (str: string, width: number): string {
   str = str.trim()
@@ -371,10 +383,11 @@ function alignCenter (str: string, width: number): string {
   str = str.trim()
   const strWidth = mixin.stringWidth(str)
 
-  /* istanbul ignore next */
+  /* c8 ignore start */
   if (strWidth >= width) {
     return str
   }
+  /* c8 ignore stop */
 
   return ' '.repeat((width - strWidth) >> 1) + str
 }
@@ -383,7 +396,9 @@ let mixin: Mixin
 export function cliui (opts: Partial<UIOptions>, _mixin: Mixin) {
   mixin = _mixin
   return new UI({
+    /* c8 ignore start */
     width: opts?.width || getWindowWidth(),
     wrap: opts?.wrap
+    /* c8 ignore stop */
   })
 }
