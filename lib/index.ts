@@ -11,10 +11,13 @@ const bottom = 2
 const left = 3
 
 export interface UIOptions {
-  width: number;
+  width?: number;
   wrap?: boolean;
   rows?: string[];
 }
+
+// The width should be worked out by the time we are constructing the actual class.
+type UIConstructorOptions = UIOptions & {width:number};
 
 interface Column {
   text: string;
@@ -45,7 +48,7 @@ export class UI {
   wrap: boolean;
   rows: ColumnArray[];
 
-  constructor (opts: UIOptions) {
+  constructor (opts: UIConstructorOptions) {
     this.width = opts.width
     this.wrap = opts.wrap ?? true
     this.rows = []
@@ -380,7 +383,7 @@ function alignCenter (str: string, width: number): string {
 }
 
 let mixin: Mixin
-export function cliui (opts: Partial<UIOptions>, _mixin: Mixin) {
+export function cliui (opts: UIOptions | undefined, _mixin: Mixin) {
   mixin = _mixin
   return new UI({
     width: opts?.width || getWindowWidth(),
