@@ -49,7 +49,7 @@
   "author": "Ben Coe <ben@npmjs.com>",
   "license": "ISC",
   "dependencies": {
-    "string-width": "^4.2.0",
+    "string-width": "^7.0.0",
     "strip-ansi": "^6.0.1",
     "wrap-ansi": "^7.0.0"
   },
