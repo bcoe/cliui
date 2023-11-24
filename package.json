@@ -18,10 +18,9 @@
     "check": "standardx '**/*.ts' && standardx '**/*.js' && standardx '**/*.cjs'",
     "fix": "standardx --fix '**/*.ts' && standardx --fix '**/*.js' && standardx --fix '**/*.cjs'",
     "pretest": "rimraf build && tsc -p tsconfig.test.json && cross-env NODE_ENV=test npm run build:cjs",
-    "test": "c8 mocha ./test/*.cjs",
-    "test:esm": "c8 mocha ./test/esm/cliui-test.mjs",
+    "test": "c8 --exclude-after-remap mocha ./test/cjs/*.cjs ./test/esm/*.mjs",
     "postest": "check",
-    "coverage": "c8 report --check-coverage",
+    "coverage": "c8 --exclude-after-remap report --check-coverage",
     "precompile": "rimraf build",
     "compile": "tsc",
     "postcompile": "npm run build:cjs",
@@ -49,11 +48,13 @@
   "author": "Ben Coe <ben@npmjs.com>",
   "license": "ISC",
   "dependencies": {
-    "string-width": "^4.2.0",
-    "strip-ansi": "^6.0.1",
-    "wrap-ansi": "^7.0.0"
+    "string-width": "^5.1.2",
+    "strip-ansi": "^7.0.1",
+    "wrap-ansi": "^8.1.0"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^22.0.2",
+    "@rollup/plugin-node-resolve": "^14.1.0",
     "@types/node": "^14.0.27",
     "@typescript-eslint/eslint-plugin": "^4.0.0",
     "@typescript-eslint/parser": "^4.0.0",
@@ -65,12 +66,12 @@
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
     "gts": "^3.0.0",
-    "mocha": "^10.0.0",
+    "mocha": "^9.2.2",
     "rimraf": "^3.0.2",
-    "rollup": "^2.23.1",
-    "rollup-plugin-ts": "^3.0.2",
+    "rollup": "^2.79.1",
+    "rollup-plugin-ts": "^2.0.7",
     "standardx": "^7.0.0",
-    "typescript": "^4.0.0"
+    "typescript": "4.6.4"
   },
   "files": [
     "build",

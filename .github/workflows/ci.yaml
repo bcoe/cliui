@@ -43,17 +43,8 @@ jobs:
       - run: npm install
         env:
           PUPPETEER_SKIP_CHROMIUM_DOWNLOAD: true
-      - run: npm test
+      - run: npm run test
       - run: npm run coverage
-  esm:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 14
-      - run: npm install
-      - run: npm run test:esm
   deno:
     runs-on: ubuntu-latest
     steps:
