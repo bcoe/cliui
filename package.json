@@ -61,7 +61,7 @@
     "chai": "^4.2.0",
     "chalk": "^4.1.0",
     "cross-env": "^7.0.2",
-    "eslint": "^7.6.0",
+    "eslint": "^9.0.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
     "gts": "^3.0.0",
